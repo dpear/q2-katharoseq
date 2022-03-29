@@ -120,6 +120,13 @@ def read_count_threshold(
                            katharo['correct_assign'],
                            method='dogbox')
 
+    # GET R^2 VALUE
+    residuals = katharo['correct_assign'] - allosteric_sigmoid(katharo['log_asv_reads'], *popt)
+    ss_res = np.sum(residuals**2)
+    ss_tot = np.sum((katharo['correct_assign'] - np.mean(katharo['correct_assign']))**2)
+    r_squared = 1 - (ss_res / ss_tot)
+    r_squared = round(r_squared, 4)
+
     # PLOT
     x = np.linspace(0, 5, 50)
     y = allosteric_sigmoid(x, *popt)
@@ -141,7 +148,8 @@ def read_count_threshold(
     max_input_html = q2templates.df_to_html(max_inputT.to_frame())
     context = {'minimum_frequency': min_freq,
                'threshold': threshold,
-               'table': max_input_html}
+               'table': max_input_html,
+               'r_squared': r_squared}
     TEMPLATES = pkg_resources.resource_filename(
         'q2_katharoseq', 'read_count_threshold_assets')
     index = os.path.join(TEMPLATES, 'index.html')
@@ -222,6 +230,10 @@ def biomass_plot(
         positive_controls.log_total_reads.values.reshape(-1, 1),
         positive_controls.log_control_cell_extraction)
 
+    R2 = lm.score(
+        positive_controls.log_total_reads.values.reshape(-1, 1),
+        positive_controls.log_control_cell_extraction)
+
     # MAKE PLOT
     y = positive_controls['log_control_cell_extraction']
     x = positive_controls['log_total_reads']
@@ -243,4 +255,6 @@ def biomass_plot(
     TEMPLATES = pkg_resources.resource_filename(
         'q2_katharoseq', 'estimating_biomass_assets')
     index = os.path.join(TEMPLATES, 'index.html')
-    q2templates.render(index, output_dir)
+    context = {'r2':R2}
+    q2templates.render(index, output_dir, context=context)
+
