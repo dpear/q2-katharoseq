@@ -121,9 +121,11 @@ def read_count_threshold(
                            method='dogbox')
 
     # GET R^2 VALUE
-    residuals = katharo['correct_assign'] - allosteric_sigmoid(katharo['log_asv_reads'], *popt)
+    residuals = katharo['correct_assign'] - allosteric_sigmoid(
+        katharo['log_asv_reads'], *popt)
     ss_res = np.sum(residuals**2)
-    ss_tot = np.sum((katharo['correct_assign'] - np.mean(katharo['correct_assign']))**2)
+    ss_tot = np.sum(
+        (katharo['correct_assign'] - np.mean(katharo['correct_assign']))**2)
     r_squared = 1 - (ss_res / ss_tot)
     r_squared = round(r_squared, 4)
 
@@ -255,6 +257,5 @@ def biomass_plot(
     TEMPLATES = pkg_resources.resource_filename(
         'q2_katharoseq', 'estimating_biomass_assets')
     index = os.path.join(TEMPLATES, 'index.html')
-    context = {'r2':R2}
+    context = {'r2': R2}
     q2templates.render(index, output_dir, context=context)
-
