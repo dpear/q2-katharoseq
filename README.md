@@ -10,7 +10,7 @@ Installation assumes a working QIIME 2 environment with a minimum version of 202
 git clone https://github.com/biocore/q2-katharoseq.git
 cd q2-katharoseq
 pip install -e .
-``` 
+```
 
 ## Use
 
@@ -30,6 +30,7 @@ Computation of a minimum read count threshold can be performed with the
 ```
 qiime katharoseq read_count_threshold \
     --i-table testdata/example_table_genus.qza  \ # a genus level table
+    --p-threshold 80 \
     --p-control classic \
     --p-positive-control-value katharoseq_control \ # name of controls in metadata
     --m-positive-control-column-file testdata/simple_katharoseq_metadata.tsv \ # your metadata
