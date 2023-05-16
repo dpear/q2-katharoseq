@@ -25,26 +25,28 @@ In order to obtain a read count threshold, computation of a minimum read count t
 ```
 qiime katharoseq read-count-threshold \
     --i-table example/fmp_collapsed_table.qza \
+    --p-threshold 90 \
+    --p-positive-control-value control \
     --m-positive-control-column-file example/fmp_metadata.tsv \
     --m-positive-control-column-column control_rct \
     --m-cell-count-column-file example/fmp_metadata.tsv \
     --m-cell-count-column-column control_cell_into_extraction \
-    --p-positive-control-value control \
     --p-control classic \
-    --p-threshold 90 \
     --o-visualization result_fmp_example.qzv
 ```
 ### Description of parameters:
+If you type `qiime katharoseq read-count-threshold` into the command line, the following information will be displayed.
 
-- `table`:  .qza table of features by samples
+- `table`:  A qiime FeatureTable collapsed to the genus level (level 6) that contains the control samples.
+- `threshold`: Threshold to use in calculating minimum frequency. Must be int in 0 .. 100.
+- `positive-control-value`: The value in the control column that demarks which samples are the positive controls.
 - `positive-control-column-file`: .tsv metadata filename
-- `positive-control-column-column`: column name in metadata that contains information on whether or not the sample is a control
-- `cell-count-column-file`: .tsv metadata filename (probably the same as `positive-control-column-file`
-- `cell-count-column-column`: column name in metadata that contains cell count information
-- `positive-control-value`: value in `positive-control-column-column` that indicates the sample is a control
-- `control`: community of controls used. IMPORTANT: please see the below section on control communities used. If there is a species in your control community that is not in any of the provided builtin options, please contact the authors of this tool. Custom control communities are not yet supported but will be in the future.
-- `threshold`: what percentage of each sample should be required to be pure
-- `visualization`: path name of output visualization file
+- `positive-control-column-column`: The column name for the column in the sample metadata that describes which samples are and are not controls.
+- 
+- `cell-count-column-file`: .tsv metadata filename (probably the same as `positive-control-column-file`)
+- `cell-count-column-column`: Column name in metadata that contains cell count information
+- `control`: Community of controls used. IMPORTANT: please see the below section on control communities used. If there is a species in your control community that is not in any of the provided builtin options, please contact the authors of this tool. Custom control communities are not yet supported but will be in the future.
+- `visualization`: Path name of output visualization file
 
 
 ## Estimating Biomass
@@ -67,6 +69,8 @@ qiime katharoseq estimating-biomass \
     --o-estimated-biomass estimated_biomass_fmp_rct
 ```
 
+To get a description of parameters type `qiime katharoseq estimating-biomass` into the command line.
+
 ## Biomass Plot
 
 Finally in order to visualize the results from `estimating-biomass`, run `biomass-plot`.
@@ -83,4 +87,5 @@ qiime katharoseq biomass-plot \
     --o-visualization biomass_plot_fmp
 ```
 
+To get a description of parameters type `qiime katharoseq biomass-plot` into the command line.
 
