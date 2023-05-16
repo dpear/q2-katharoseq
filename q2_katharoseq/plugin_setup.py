@@ -49,7 +49,9 @@ plugin.visualizers.register_function(
     },
     parameter_descriptions={
         'control': (
-            'The type of positive control used.'
+            'The type of positive control used. '
+            'Possible values are atcc, zymobiomics, classic, single. '
+            'Please see github readme for more information.'
         ),
         'threshold': (
             'Threshold to use in calculating minimum frequency. '
