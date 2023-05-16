@@ -34,7 +34,8 @@ qiime katharoseq read-count-threshold \
     --p-threshold 90 \
     --o-visualization result_fmp_example.qzv
 ```
-
+Description of parameters:
+:table
 ## Estimating Biomass
 
  Estimate the biomass of samples using KatharoSeq controls. After obtaining a read count threshold using the action above, use the same metadata and collapsed table as input. The `--p-pcr-template-vol` and `--p-dna-template-vol` values are numeric values that should come from your experimental procedures.
