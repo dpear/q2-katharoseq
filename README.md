@@ -34,8 +34,19 @@ qiime katharoseq read-count-threshold \
     --p-threshold 90 \
     --o-visualization result_fmp_example.qzv
 ```
-Description of parameters:
-:table
+### Description of parameters:
+
+- `table`:  .qza table of features by samples
+- `positive-control-column-file`: .tsv metadata filename
+- `positive-control-column-column`: column name in metadata that contains information on whether or not the sample is a control
+- `cell-count-column-file`: .tsv metadata filename (probably the same as `positive-control-column-file`
+- `cell-count-column-column`: column name in metadata that contains cell count information
+- `positive-control-value`: value in `positive-control-column-column` that indicates the sample is a control
+- `control`: community of controls used. IMPORTANT: please see the below section on control communities used. If there is a species in your control community that is not in any of the provided builtin options, please contact the authors of this tool. Custom control communities are not yet supported but will be in the future.
+- `threshold`: what percentage of each sample should be required to be pure
+- `visualization`: path name of output visualization file
+
+
 ## Estimating Biomass
 
  Estimate the biomass of samples using KatharoSeq controls. After obtaining a read count threshold using the action above, use the same metadata and collapsed table as input. The `--p-pcr-template-vol` and `--p-dna-template-vol` values are numeric values that should come from your experimental procedures.
