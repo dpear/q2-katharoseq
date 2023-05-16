@@ -45,7 +45,7 @@ If you type `qiime katharoseq read-count-threshold` into the command line, the f
 - 
 - `cell-count-column-file`: .tsv metadata filename (probably the same as `positive-control-column-file`)
 - `cell-count-column-column`: Column name in metadata that contains cell count information
-- `control`: Community of controls used. IMPORTANT: please see the below section on control communities used. If there is a species in your control community that is not in any of the provided builtin options, please contact the authors of this tool. Custom control communities are not yet supported but will be in the future.
+- `control`: Community of controls used. IMPORTANT: please see the below section on possible control communities. If there is a species in your control community that is not in any of the provided builtin options, please contact the authors of this tool. Custom control communities are not yet supported but will be in the future.
 - `visualization`: Path name of output visualization file
 
 
@@ -89,3 +89,29 @@ qiime katharoseq biomass-plot \
 
 To get a description of parameters type `qiime katharoseq biomass-plot` into the command line.
 
+## Control Communities for read-count-threshold
+
+If your control community is a subset of any of these, use that category, however if your control community contains speciese that are not in that group, or if they are different altogether, please contact dsperry@ucsd.edu. Support for custom controls will be included soon.
+
+`atcc`:
+- d__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__Clostridium,
+- d__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;g__,
+- d__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;g__Escherichia-Shigella,
+- d__Bacteria;p__Firmicutes;c__Bacilli;o__Staphylococcales;f__Staphylococcaceae;g__Staphylococcus
+
+`zymobiomics`:
+- d__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Listeriaceae;g__Listeria,
+- d__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pseudomonadales;f__Pseudomonadaceae;g__Pseudomonas,
+- d__Bacteria;p__Firmicutes;c__Bacilli;o__Bacillales;f__Bacillaceae;g__Bacillus,
+- d__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;__,
+- d__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacterales;f__Enterobacteriaceae;g__Escherichia-Shigella,
+- d__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Lactobacillaceae;g__Lactobacillus,
+- d__Bacteria;p__Firmicutes;c__Bacilli;o__Lactobacillales;f__Enterococcaceae;g__Enterococcus,
+- d__Bacteria;p__Firmicutes;c__Bacilli;o__Staphylococcales;f__Staphylococcaceae;g__Staphylococcus
+
+`classic`:
+- d__Bacteria;p__Firmicutes;c__Bacilli;o__Bacillales;f__Bacillaceae;g__Bacillus,
+- d__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhodobacterales;f__Rhodobacteraceae;g__Paracoccus
+
+`single`:
+- d__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__Variovorax
