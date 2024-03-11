@@ -65,15 +65,13 @@ def get_threshold(r1, r2, thresh):
     min_freq = np.power(10, min_log_reads).astype(int)
     return min_freq
 
-
-def read_count_threshold(
-        output_dir: str,
+def calculate_threshold(
         threshold: int,
         positive_control_value: str,
         positive_control_column: qiime2.CategoricalMetadataColumn,
         cell_count_column: qiime2.NumericMetadataColumn,
         table: pd.DataFrame,
-        control: str) -> None:
+        control: str):
 
     # CONVERSIONS
     positive_control_column = positive_control_column.to_series()
@@ -130,6 +128,32 @@ def read_count_threshold(
                            katharo['log_asv_reads'],
                            katharo['correct_assign'],
                            method='dogbox')
+
+    # FIND THRESHOLD
+    min_freq = get_threshold(katharo['log_asv_reads'],
+                             katharo['correct_assign'],
+                             threshold/100)
+
+    return popt, pcov, min_freq, katharo, max_inputT
+
+
+def read_count_threshold(
+        output_dir: str,
+        threshold: int,
+        positive_control_value: str,
+        positive_control_column: qiime2.CategoricalMetadataColumn,
+        cell_count_column: qiime2.NumericMetadataColumn,
+        table: pd.DataFrame,
+        control: str) -> None:
+
+    
+    popt, pcov, min_freq, katharo, max_inputT = \
+        calculate_threshold(threshold,
+                            positive_control_value,
+                            positive_control_column,
+                            cell_count_column,
+                            table,
+                            control)
 
     # PLOT
     x = np.linspace(0, 5, 50)
